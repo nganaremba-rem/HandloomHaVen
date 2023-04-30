@@ -1,20 +1,41 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React, { Suspense, lazy } from "react";
+import { ActivityIndicator } from "react-native";
+import Container from "./components/Container";
+import StateContextProvider from "./context/StateContext";
+import Home from "./screens/Home";
+import Register from "./screens/Register";
+// import dynamicImport from "./dynamicImport";
+
+const Stack = createNativeStackNavigator();
+
+// const Home = lazy(() => import("./screens/Home.jsx"));
+// const Register = lazy(() => import("./screens/Register.jsx"));
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Suspense
+      fallback={
+        <Container>
+          <ActivityIndicator />
+        </Container>
+      }
+    >
+      <StateContextProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerShown: false,
+              animation: "slide_from_bottom",
+              animationDuration: 200,
+            }}
+          >
+            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="Register" component={Register} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </StateContextProvider>
+    </Suspense>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
