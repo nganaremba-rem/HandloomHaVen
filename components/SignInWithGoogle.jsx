@@ -3,7 +3,7 @@ import React from "react";
 
 const SignInWithGoogle = () => {
   return (
-    <View className="rounded-lg flex-row mt-14 border border-1 border-white">
+    <View className={"rounded-lg flex-row mt-14 border border-1 border-white"}>
       <TouchableOpacity className=" min-w-full flex-row items-center gap-3 py-2 justify-center">
         <Image
           source={require("../assets/logos/google.png")}

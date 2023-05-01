@@ -144,7 +144,7 @@ const Register = ({ navigation }) => {
         </Text>
         <TouchableOpacity
           className=" py-4 px-2"
-          onPress={() => navigation.navigate("Home")}
+          onPress={() => navigation.navigate("Login")}
         >
           <Text className="text-sky-700 font-[baloo2-bold]">Login</Text>
         </TouchableOpacity>

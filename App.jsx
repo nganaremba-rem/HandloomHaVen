@@ -1,11 +1,12 @@
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import React, { Suspense, lazy } from "react";
+import React, { Suspense } from "react";
 import { ActivityIndicator } from "react-native";
 import Container from "./components/Container";
 import StateContextProvider from "./context/StateContext";
 import Home from "./screens/Home";
-import Register from "./screens/Register";
+import AuthContextProvider from "./context/AuthContext";
 // import dynamicImport from "./dynamicImport";
 
 const Stack = createNativeStackNavigator();
@@ -15,27 +16,28 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <Suspense
-      fallback={
-        <Container>
-          <ActivityIndicator />
-        </Container>
-      }
-    >
+    <AuthContextProvider>
       <StateContextProvider>
         <NavigationContainer>
-          <Stack.Navigator
-            screenOptions={{
-              headerShown: false,
-              animation: "slide_from_bottom",
-              animationDuration: 200,
-            }}
+          <Suspense
+            fallback={
+              <Container>
+                <ActivityIndicator />
+              </Container>
+            }
           >
-            <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="Register" component={Register} />
-          </Stack.Navigator>
+            <Stack.Navigator
+              screenOptions={{
+                headerShown: false,
+                animation: "slide_from_bottom",
+                animationDuration: 200,
+              }}
+            >
+              <Stack.Screen name="Home" component={Home} />
+            </Stack.Navigator>
+          </Suspense>
         </NavigationContainer>
       </StateContextProvider>
-    </Suspense>
+    </AuthContextProvider>
   );
 }
