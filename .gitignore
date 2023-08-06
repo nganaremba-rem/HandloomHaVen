@@ -9,6 +9,12 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
+.vscode/
+diagrams/
+Handloom\ photo\ huranbi/
+2.jpg
+tokengit
+Untitled\ Diagram.jpg
 
 # macOS
 .DS_Store
